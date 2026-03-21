@@ -1,0 +1,14 @@
+build/
+bin/
+target/
+.settings/
+.metadata/
+Servers/
+tmp/
+
+*.class
+*.log
+.DS_Store
+
+CREDENTIALS.txt
+database_export.sql
