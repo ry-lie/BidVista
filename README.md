@@ -27,7 +27,7 @@ A Java-based web auction platform built with JSP, JDBC, MySQL, and Apache Tomcat
 ## Run
 1. Update database credentials in `DatabaseConnection.java`
 2. Deploy the project on Tomcat 9
-3. Open `http://localhost:8080/AuctionSystem/login.jsp`
+3. Open `http://localhost:8080/AuctionSystem/index.jsp`
 
 ## 📺 Screen Layout
 
