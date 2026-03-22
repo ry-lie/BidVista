@@ -1,3 +1,5 @@
+<img width=full alt="Image" src="https://github.com/user-attachments/assets/d19b0bc5-36a3-43d4-874a-fb0f8c6ef44a" />
+
 # BidVista
 
 A Java-based web auction platform built with JSP, JDBC, MySQL, and Apache Tomcat.
