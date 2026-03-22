@@ -1,30 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.auction.model.User" %>
 <%
 User user = (User) session.getAttribute("user");
-if (user == null) { response.sendRedirect("login.jsp"); return; }
+if (user == null) {
+    response.sendRedirect("login.jsp");
+    return;
+}
 %>
 <!DOCTYPE html>
 <html>
-<head><title>Ask Question</title>
-<style>
-body{font-family:Arial;background:#f5f5f5;margin:0;padding:20px}
-.container{max-width:700px;margin:0 auto}
-.form{background:white;padding:30px;border-radius:5px}
-textarea{width:100%;padding:12px;border:2px solid #e0e0e0;border-radius:5px;min-height:150px;font-family:inherit}
-button{width:100%;padding:15px;background:#667eea;color:white;border:none;border-radius:5px;font-size:16px;cursor:pointer;margin-top:15px}
-</style>
+<head>
+    <title>BidVista - Ask Question</title>
+    <%@ include file="components/head.jspf" %>
 </head>
-<body>
-<div class="container">
-<div class="form">
-<h2>Ask a Question</h2>
-<p style="color:#666">Our customer service team will respond soon</p>
-<form action="askQuestionProcess.jsp" method="post">
-<textarea name="questionText" placeholder="Type your question here..." required></textarea>
-<button type="submit">Submit Question</button>
-</form>
-<p style="text-align:center;margin-top:20px"><a href="questions.jsp" style="color:#667eea">Back to Q&A</a></p>
-</div>
-</div>
+<body class="ask-question-page">
+    <main class="internal-page-main">
+        <div class="container-wide internal-page-content ask-question-content">
+            <section class="ask-question-card">
+                <h2>Ask a Question</h2>
+                <p class="ask-question-subtitle">Our customer service team will respond soon</p>
+
+                <form action="askQuestionProcess.jsp" method="post" class="ask-question-form">
+                    <div class="form-group">
+                        <textarea
+                            name="questionText"
+                            placeholder="Type your question here..."
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="ask-question-btn">Submit Question</button>
+                </form>
+
+                <p class="ask-question-back-link-wrap">
+                    <a href="questions.jsp" class="ask-question-back-link">Back to Q&amp;A</a>
+                </p>
+            </section>
+        </div>
+    </main>
 </body>
 </html>

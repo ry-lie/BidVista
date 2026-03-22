@@ -1,50 +1,66 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.auction.model.*" %>
 <%@ page import="com.auction.dao.UserDAO" %>
 <%@ page import="java.util.*" %>
 <%
 User user = (User) session.getAttribute("user");
-if (user == null || (!user.isAdmin() && !user.getRole().equals("customer_representative"))) { 
-    response.sendRedirect("dashboard.jsp"); return; 
+if (user == null || (!user.isAdmin() && !user.getRole().equals("customer_representative"))) {
+    response.sendRedirect("dashboard.jsp");
+    return;
 }
 List<User> users = new UserDAO().getAllUsers();
+String backUrl = user.isAdmin() ? "adminDashboard.jsp" : "repDashboard.jsp";
 %>
 <!DOCTYPE html>
 <html>
-<head><title>Manage Users</title>
-<style>
-body{font-family:Arial;background:#f5f5f5;margin:0;padding:20px}
-.container{max-width:1200px;margin:0 auto}
-.nav{background:#28a745;color:white;padding:15px;margin-bottom:20px;border-radius:5px}
-.nav a{color:white;text-decoration:none;margin-right:15px}
-table{width:100%;background:white;border-collapse:collapse}
-th,td{padding:15px;text-align:left;border-bottom:1px solid #e0e0e0}
-th{background:#f9f9f9}
-button{padding:6px 12px;margin:0 3px;border:none;border-radius:3px;cursor:pointer}
-.edit{background:#ffc107;color:white}
-.delete{background:#dc3545;color:white}
-</style>
+<head>
+    <title>BidVista - Manage Users</title>
+    <%@ include file="components/head.jspf" %>
 </head>
-<body>
-<div class="container">
-<div class="nav">
-<h2 style="display:inline">Manage Users</h2>
-<a href="<%=user.isAdmin()?"adminDashboard.jsp":"repDashboard.jsp"%>">Back to Dashboard</a>
-</div>
-<table>
-<tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr>
-<%for(User u:users){%>
-<tr>
-<td><%=u.getUserId()%></td>
-<td><%=u.getName()%></td>
-<td><%=u.getEmail()%></td>
-<td><%=u.getRole()%></td>
-<td>
-<a href="editUser.jsp?id=<%=u.getUserId()%>"><button class="edit">Edit</button></a>
-<a href="deleteUser.jsp?id=<%=u.getUserId()%>" onclick="return confirm('Delete this user?')"><button class="delete">Delete</button></a>
-</td>
-</tr>
-<%}%>
-</table>
-</div>
+<body class="manage-users-page">
+    <main class="internal-page-main">
+        <div class="container-wide internal-page-content">
+            <section class="manage-users-header">
+                <div class="manage-users-title">Manage Users</div>
+
+                <nav class="manage-users-links">
+                    <a href="<%= backUrl %>">Back to Dashboard</a>
+                    <a href="logout.jsp">Logout</a>
+                </nav>
+            </section>
+
+            <section class="manage-users-table-card">
+                <div class="manage-users-table-wrap">
+                    <table class="manage-users-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (User u : users) { %>
+                                <tr>
+                                    <td><%= u.getUserId() %></td>
+                                    <td><%= u.getName() %></td>
+                                    <td><%= u.getEmail() %></td>
+                                    <td><span class="manage-users-role"><%= u.getRole() %></span></td>
+                                    <td>
+                                        <div class="manage-users-actions">
+                                            <a href="editUser.jsp?id=<%= u.getUserId() %>" class="manage-users-btn edit-btn">Edit</a>
+                                            <a href="deleteUser.jsp?id=<%= u.getUserId() %>" class="manage-users-btn delete-btn" onclick="return confirm('Delete this user?')">Delete</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
 </body>
 </html>

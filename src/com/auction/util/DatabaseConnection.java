@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/auction_db";
-    private static final String DB_USER = "your_username";
-    private static final String DB_PASSWORD = "your_password";
+	private static final String DB_URL = System.getenv("AUCTION_DB_URL");
+	private static final String DB_USER = System.getenv("AUCTION_DB_USER");
+	private static final String DB_PASSWORD = System.getenv("AUCTION_DB_PASSWORD");
     
     static {
         try {
