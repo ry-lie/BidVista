@@ -13,7 +13,7 @@ A Java-based web auction platform built with JSP, JDBC, MySQL, and Apache Tomcat
 
 ## Tech Stack
 - Java
-- JSP / Servlet
+- JSP
 - JDBC
 - MySQL
 - Apache Tomcat
